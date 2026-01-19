@@ -1,17 +1,55 @@
 # Makefile for deploying services
 
-.PHONY: deploy deploy-all deploy-frontend reset-dev add-license help clean
+.PHONY: deploy deploy-all deploy-frontend reset-dev add-license help clean dev dev-docker dev-down dev-logs
 
 # Default target
 help:
 	@echo "Available targets:"
-	@echo "  deploy          - Deploy the FFP project"
-	@echo "  deploy-all      - Deploy AI service + Frontend together"
-	@echo "  deploy-frontend - Deploy the frontend web UI service"
-	@echo "  reset-dev       - Reset dev branch from main"
-	@echo "  add-license     - Add license headers to source files"
-	@echo "  clean          - Clean build artifacts and logs"
-	@echo "  help           - Show this help message"
+	@echo ""
+	@echo "  Development (Docker):"
+	@echo "    dev             - Start backend (Docker) + frontend (native)"
+	@echo "    dev-docker      - Start backend in Docker only"
+	@echo "    dev-down        - Stop Docker services"
+	@echo "    dev-logs        - View Docker container logs"
+	@echo ""
+	@echo "  Deployment:"
+	@echo "    deploy          - Deploy the FFP project"
+	@echo "    deploy-all      - Deploy AI service + Frontend together"
+	@echo "    deploy-frontend - Deploy the frontend web UI service"
+	@echo ""
+	@echo "  Utilities:"
+	@echo "    reset-dev       - Reset dev branch from main"
+	@echo "    add-license     - Add license headers to source files"
+	@echo "    clean           - Clean build artifacts and logs"
+	@echo "    help            - Show this help message"
+
+# ──────────────────────────────────────────────────────────────
+# Development (Docker)
+# ──────────────────────────────────────────────────────────────
+
+dev: ## Start backend (Docker) + frontend (native) in parallel
+	@echo "🚀 Starting development environment..."
+	@echo "   Backend:  Docker (http://localhost:8081)"
+	@echo "   Frontend: Native (http://localhost:3000)"
+	@echo ""
+	@trap 'docker compose down' EXIT; \
+	docker compose up --build & \
+	cd services/frontend && npm run dev
+
+dev-docker: ## Start backend in Docker only
+	@echo "🐳 Starting backend in Docker..."
+	docker compose up --build
+
+dev-down: ## Stop Docker services
+	@echo "🛑 Stopping Docker services..."
+	docker compose down
+
+dev-logs: ## View Docker container logs
+	docker compose logs -f
+
+# ──────────────────────────────────────────────────────────────
+# Deployment
+# ──────────────────────────────────────────────────────────────
 
 # Deploy the FFP project
 deploy:
@@ -37,6 +75,10 @@ deploy-frontend:
 	@chmod +x scripts/deploy-frontend-service.sh
 	@cd scripts && ./deploy-frontend-service.sh
 
+# ──────────────────────────────────────────────────────────────
+# Utilities
+# ──────────────────────────────────────────────────────────────
+
 # Reset dev branch from main
 reset-dev:
 	@echo "🔄 Resetting dev branch from main..."
@@ -56,4 +98,5 @@ clean:
 	@rm -rf services/frontend/out
 	@rm -rf services/frontend/node_modules/.cache
 	@rm -f scripts/logs/*.log
+	@docker compose down -v 2>/dev/null || true
 	@echo "✨ Clean completed!"

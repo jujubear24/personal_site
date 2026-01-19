@@ -1,7 +1,7 @@
 # Makefile for FastAPI AgentChat Service
 # Copyright 2025 Loïc Muhirwa
 
-.PHONY: help install dev prod start stop restart status clean test lint format check logs setup env-check
+.PHONY: help install dev prod start stop restart status clean test lint format check logs setup env-check docker-dev docker-down docker-logs docker-shell docker-rebuild
 
 # Default target
 .DEFAULT_GOAL := help
@@ -72,6 +72,28 @@ dev-bg: install env-check ## Start development server in background
 	@echo "$(BLUE)🚀 Starting development server in background...$(NC)"
 	@chmod +x $(SCRIPTS_DIR)/deploy-server.sh
 	@./$(SCRIPTS_DIR)/deploy-server.sh start --dev
+
+
+# Docker Development
+
+docker-dev: ## Start development server in Docker with hot reload
+	@echo "$(BLUE)🐳 Starting development server in Docker...$(NC)"
+	cd ../.. && docker compose up --build
+
+docker-down: ## Stop Docker container
+	@echo "$(BLUE)🛑 Stopping Docker container...$(NC)"
+	cd ../.. && docker compose down
+
+docker-logs: ## View Docker container logs
+	cd ../.. && docker compose logs -f ai
+
+docker-shell: ## Open shell in Docker container
+	cd ../.. && docker compose exec ai bash
+
+docker-rebuild: ## Rebuild Docker image (use after dependency changes)
+	@echo "$(BLUE)🔨 Rebuilding Docker image...$(NC)"
+	cd ../.. && docker compose build --no-cache ai
+
 
 # Production
 prod: install env-check ## Start production server

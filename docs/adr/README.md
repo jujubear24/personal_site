@@ -4,22 +4,12 @@ This directory contains Architecture Decision Records (ADRs) for the personal_si
 
 ## What is an ADR?
 
-An ADR is a document that captures an important architectural decision made along with its context and consequences. ADRs help us:
+An ADR captures an important architectural decision along with its context and consequences. ADRs help us:
 
 - **Track why** decisions were made, not just what was decided
-- **Onboard new contributors** quickly with historical context
-- **Avoid revisiting** the same discussions repeatedly
+- **Onboard new contributors** quickly
+- **Avoid revisiting** the same discussions
 - **Document divergence** from the upstream repository
-
-## ADR Format
-
-Each ADR follows a consistent format:
-
-- **Title**: Short noun phrase (e.g., "Use Docker for Local Development")
-- **Status**: Draft → Proposed → Accepted → Deprecated/Superseded
-- **Context**: What is the issue we're addressing?
-- **Decision**: What have we decided to do?
-- **Consequences**: What are the trade-offs?
 
 ## Creating a New ADR
 
@@ -36,4 +26,4 @@ Each ADR follows a consistent format:
 
 ## Upstream Divergence
 
-This repository is a fork of [justmeloic/from-first-principles](https://github.com/justmeloic/from-first-principles). ADRs document intentional divergence from the upstream codebase. When considering merging upstream changes, review ADRs to understand what local modifications exist and why.
+This repository is a fork of [justmeloic/from-first-principles](https://github.com/justmeloic/from-first-principles). ADRs document intentional divergence from the upstream codebase.

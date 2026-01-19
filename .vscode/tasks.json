@@ -3,8 +3,23 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "dev: ai",
+			"label": "dev: ai (native)",
 			"command": "lsof -ti:8081 | xargs kill -9 2>/dev/null || true; cd services/ai && make dev",
+			"presentation": {
+				"echo": false,
+				"group": "dev",
+				"showReuseMessage": false,
+				"close": false,
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"label": "dev: ai (docker)",
+			"command": "docker compose down 2>/dev/null || true; docker compose up --build",
 			"presentation": {
 				"echo": false,
 				"group": "dev",
@@ -32,9 +47,18 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "dev (native)",
+			"dependsOrder": "parallel",
+			"dependsOn": ["dev: ai (native)", "dev: frontend"],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		},
+		{
 			"label": "dev",
 			"dependsOrder": "parallel",
-			"dependsOn": ["dev: ai", "dev: frontend"],
+			"dependsOn": ["dev: ai (docker)", "dev: frontend"],
 			"group": {
 				"kind": "build",
 				"isDefault": true
