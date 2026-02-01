@@ -23,6 +23,8 @@ An ADR captures an important architectural decision along with its context and c
 | ADR | Title | Status | Date |
 |-----|-------|--------|------|
 | [0001](0001-use-docker-for-local-development.md) | Use Docker for Local Development | Proposed | 2025-01-16 |
+| [0002](0002-migrate-to-sentient-ui.md) | Migrate to Sentient UI | Proposed | 2026-01-31 |
+| [0003](0003-classic-ui-preservation.md) | Classic UI Preservation Strategy | Proposed | 2026-01-31 |
 
 ## Upstream Divergence
 
