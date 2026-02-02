@@ -58,6 +58,9 @@
   --back-btn-text-color: #000000;
   --page-bg-color: #ffffff;
   --article-toggle-bg-color: #ccc;
+
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: 'Space Mono', monospace;
 }
 
 .dark {
@@ -111,6 +114,9 @@
     font-family: "Nunito Sans", sans-serif;
     font-weight: 100;
     @apply bg-background text-foreground;
+
+    font-family: var(--font-mono), monospace;
+    overflow: hidden;
   }
 
   h1,
@@ -199,4 +205,138 @@
 .aspect-square { /* Or your custom class */
   aspect-ratio: 1 / 1; /* Square aspect ratio */
   width: 300px; /* Example: Set a fixed width, height will adjust to maintain aspect ratio */
+}
+
+/* Font utilities */ 
+.font-serif {
+  font-family: var(--font-serif), serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Scrollbar
+   -------------------------------------------------------------------------- */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 2px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #374151;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
+
+/* --------------------------------------------------------------------------
+   Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Animation Utilities
+   -------------------------------------------------------------------------- */
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animation delays */
+.delay-75 {
+  animation-delay: 75ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+/* --------------------------------------------------------------------------
+   Selection Styles
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: rgb(253 230 138);
+  /* amber-200 */
+  color: black;
+}
+
+.dark ::selection {
+  background-color: rgb(180 83 9);
+  /* amber-700 */
+  color: white;
+}
+
+/* --------------------------------------------------------------------------
+   Backdrop Blur Support (fallback for older browsers)
+   -------------------------------------------------------------------------- */
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-xl {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .dark .backdrop-blur-xl {
+    background-color: rgba(17, 24, 39, 0.95);
+  }
 }
