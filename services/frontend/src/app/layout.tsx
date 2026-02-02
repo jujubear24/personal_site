@@ -47,10 +47,8 @@ export default function RootLayout({
         className={`${playfair.variable} ${spaceMono.variable} font-mono antialiased`}
       >
         <ThemeProvider
-          attribute="class"
           defaultTheme="light"
           enableSystem={false}
-          disableTransitionOnChange={false}
         >
           {children}
           <Toaster />

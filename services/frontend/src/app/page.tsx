@@ -9,7 +9,7 @@
 
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/providers/theme-provider';
 import { useChat } from '@/hooks/use-chat';
 import { SentientNav, ChatInterface, ContentOverlay, FloatingChatButton } from '@/components/Sentient';
 import { type ViewMode, type Theme } from '@/types/sentient';
@@ -30,9 +30,9 @@ export default function SentientPage() {
   const [currentView, setCurrentView] = useState<ViewMode>('AGENT');
   const [isFloatingChatOpen, setIsFloatingChatOpen] = useState(false);
 
-  // Theme from next-themes
+  // Theme from custom provider
   const { theme, setTheme } = useTheme();
-  const currentTheme: Theme = (theme as Theme) || 'light';
+  const currentTheme: Theme = theme;
 
   // Chat state from unified hook
   const { messages, agentState, sendMessage, clearChat } = useChat({
@@ -50,7 +50,7 @@ export default function SentientPage() {
 
   // Handle theme toggle
   const handleThemeToggle = () => {
-    setTheme(currentTheme === 'light' ? 'dark' : 'light');
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
