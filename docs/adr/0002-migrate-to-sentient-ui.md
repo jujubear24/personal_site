@@ -1,6 +1,6 @@
 # 0002: Migrate to Sentient UI
 
-- **Status**: Proposed
+- **Status**: Accepted
 - **Date**: 2026-01-31
 - **Authors**: @jujubear24
 
@@ -92,6 +92,17 @@ Delete Classic UI entirely. Rejected because Classic UI has value as a simpler t
 ### Alternative 4: Keep Gemini API integration
 
 Use Gemini API for Sentient chat instead of FastAPI. Rejected because it loses RAG functionality over resume/content which is a core feature.
+
+## Outcome
+
+Successfully implemented on 2026-02-02:
+
+- Sentient UI is now the default experience at `/`
+- Classic UI preserved in `src/classic/` with restoration instructions
+- Chat integrated with FastAPI backend (confirmed working)
+- Theme toggle working with custom ThemeProvider
+- Build passing with ~326KB total bundle for main page
+- All views functional: Agent, Resume, Blog, Contact
 
 ## References
 

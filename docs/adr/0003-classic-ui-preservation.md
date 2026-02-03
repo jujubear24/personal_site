@@ -1,6 +1,6 @@
 # 0003: Classic UI Preservation Strategy
 
-- **Status**: Proposed
+- **Status**: Accepted
 - **Date**: 2026-01-31
 - **Authors**: @jujubear24
 
@@ -27,7 +27,7 @@ We will **preserve the Classic UI in a `classic/` directory** at `services/front
 
 ### Directory structure
 
-```bash
+```
 services/frontend/src/classic/
 ├── README.md                    # Restoration instructions
 ├── app/
@@ -100,6 +100,16 @@ Publish Classic UI as an installable npm package. Rejected as overkill for a tem
 ### Alternative 3: Documentation only
 
 Don't preserve code, just document how to build a Classic-style UI. Rejected because working code is more valuable than documentation alone.
+
+## Outcome
+
+Successfully implemented on 2026-02-02:
+
+- Classic UI preserved in `src/classic/` directory
+- Includes all app pages: agent, blog, engineering, resume, search
+- Includes all Classic-specific components: Agent, Content, Home, Layout, Search
+- README.md with restoration instructions added
+- Shared dependencies remain accessible via `@/` alias
 
 ## References
 
