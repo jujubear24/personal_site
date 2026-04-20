@@ -1,18 +1,38 @@
-import { AgentFloatingButton } from "@/components/Agent/AgentFloatingButton";
-import { Footer } from "@/components/Layout/Footer";
-import { NavBar } from "@/components/Layout/NavBar";
-import { SettingsFloatingButton } from "@/components/Layout/SettingsFloatingButton";
-import { ThemeProvider } from "@/providers/theme-provider";
-import type { Metadata } from "next";
-import { Toaster } from "sonner";
-import "../styles/globals.css";
+/**
+ * Sentient UI Root Layout
+ * 
+ * Minimal layout for the Sentient experience.
+ * No NavBar/Footer - navigation is handled by SentientNav component.
+ */
+
+import type { Metadata } from 'next';
+import { Playfair_Display, Space_Mono } from 'next/font/google';
+import { ThemeProvider } from '@/providers/theme-provider';
+import { Toaster } from '@/components/ui/toaster';
+import '@/styles/globals.css';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: "From First Principles",
-  description:
-    "Knowledge empowers individuals and enhances lives, and we're committed to providing a platform for lifelong learning.",
-  icons: {
-    icon: "/images/tab-logo.png",
+  title: 'Jules | Senior Systems Engineer',
+  description: 'Personal portfolio and AI assistant - Building digital systems at the intersection of engineering precision and creative vision.',
+  keywords: ['software engineer', 'AI', 'portfolio', 'web development', 'systems engineering'],
+  authors: [{ name: 'Jules' }],
+  openGraph: {
+    title: 'Jules | Senior Systems Engineer',
+    description: 'Personal portfolio and AI assistant',
+    type: 'website',
   },
 };
 
@@ -23,27 +43,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <ThemeProvider defaultTheme="light" enableSystem>
-          <div className="min-h-screen bg-light-mode-white dark:bg-black transition-colors duration-0 ">
-            <NavBar />
-            {children}
-            <Footer />
-            <AgentFloatingButton />
-            <SettingsFloatingButton />
-          </div>
+      <body
+        className={`${playfair.variable} ${spaceMono.variable} font-mono antialiased`}
+      >
+        <ThemeProvider
+          defaultTheme="light"
+          enableSystem={false}
+        >
+          {children}
+          <Toaster />
         </ThemeProvider>
-        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
