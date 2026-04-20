@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import { useTheme } from '@/providers/theme-provider';
 import { useChat } from '@/hooks/use-chat';
 import { SentientNav, ChatInterface, ContentOverlay, FloatingChatButton } from '@/components/Sentient';
+import Loader from '@/components/Sentient/Loader';
 import { type ViewMode, type Theme } from '@/types/sentient';
 
 // Dynamic import for 3D scene (no SSR - WebGL requires browser)
@@ -29,6 +30,7 @@ export default function SentientPage() {
   // View state
   const [currentView, setCurrentView] = useState<ViewMode>('AGENT');
   const [isFloatingChatOpen, setIsFloatingChatOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Theme from custom provider
   const { theme, setTheme } = useTheme();
@@ -55,6 +57,11 @@ export default function SentientPage() {
 
   return (
     <div className={`relative w-full h-screen overflow-hidden`}>
+      {isLoading && <Loader onFinished={() => setIsLoading(false)} />}
+
+      <div className={`relative w-full h-full transition-all duration-1000 ${isLoading ? 'blur-sm scale-105' : 'blur-0 scale-100'}`}>
+      <div className={`transition-opacity duration-1000 delay-200 w-full h-full ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+
       {/* Background base color */}
       <div className="absolute inset-0 bg-[#F3F4F6] dark:bg-[#030712] transition-colors duration-700" />
 
@@ -147,6 +154,8 @@ export default function SentientPage() {
           SYSTEM V3.2 // ONLINE
         </p>
       </div>
+      </div>{/* end opacity wrapper */}
+      </div>{/* end blur/scale wrapper */}
     </div>
   );
 }

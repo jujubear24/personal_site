@@ -5,6 +5,7 @@
  */
 
 export { default as AgentScene } from './AgentScene';
+export { default as Loader } from './Loader';
 export { default as ChatInterface } from './ChatInterface';
 export { default as ContentOverlay } from './ContentOverlay';
 export { default as SentientNav } from './SentientNav';

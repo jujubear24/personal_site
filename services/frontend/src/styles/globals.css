@@ -171,6 +171,7 @@
 }
 
 @layer utilities {
+
   /* Add these new utility classes */
   .mobile-menu-open {
     overflow: hidden;
@@ -202,12 +203,15 @@
   background: var(--arrow-btn-hover-color);
 }
 
-.aspect-square { /* Or your custom class */
-  aspect-ratio: 1 / 1; /* Square aspect ratio */
-  width: 300px; /* Example: Set a fixed width, height will adjust to maintain aspect ratio */
+.aspect-square {
+  /* Or your custom class */
+  aspect-ratio: 1 / 1;
+  /* Square aspect ratio */
+  width: 300px;
+  /* Example: Set a fixed width, height will adjust to maintain aspect ratio */
 }
 
-/* Font utilities */ 
+/* Font utilities */
 .font-serif {
   font-family: var(--font-serif), serif;
 }
@@ -277,6 +281,29 @@
   }
 }
 
+/* Float animation for ChatInterface welcome hero */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Slow spin for avatar rings */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 /* --------------------------------------------------------------------------
    Animation Utilities
    -------------------------------------------------------------------------- */
@@ -292,6 +319,13 @@
   animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
 /* Animation delays */
 .delay-75 {
   animation-delay: 75ms;
